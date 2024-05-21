@@ -1,10 +1,16 @@
 import { Module , Logger} from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AuthGuard } from './auth-service/authGuard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
+import { HistoryModule } from './history/history.module';
+import { MedicsModule } from './medics/medics.module';
+import { EntriesModule } from './entries/entries.module';
+import { ConsultsModule } from './consults/consults.module';
+import { PracticesModule } from './practices/practices.module';
+import { PatientsModule } from './patients/patients.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth-service/auth-service.module';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,15 +27,24 @@ import { User } from './user/entities/user.entity';
           username:ConfigService.get("DB_USERNAME"),
           password:ConfigService.get("DB_PASSWORD"),
           database:ConfigService.get("DB_DATABASE"),
-          entities:[User],
+          autoLoadEntities:true,
           synchronize:true
         }
       )
     }),
-    UserModule,
+    HistoryModule,
+    MedicsModule,
+    EntriesModule,
+    ConsultsModule,
+    PracticesModule,
+    PatientsModule,
+    UsersModule,
+    AuthModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  // providers: [{
+  //   provide:APP_GUARD,
+  //   useClass:AuthGuard
+  // }],
 })
 export class AppModule {
   private readonly logger = new Logger(AppModule.name);
