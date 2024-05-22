@@ -1,3 +1,4 @@
+
 export class CreateMedicDto {
     id:number;
     name:string;

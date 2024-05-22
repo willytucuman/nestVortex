@@ -1,6 +1,10 @@
+import { enfermedad } from "../entities/consult.entity";
+import { IsIn } from "class-validator";
 export class CreateConsultDto {
-    private motivo: string;
-    private diagnostico: string;
-    private confirmacion: boolean;
+    fecha:Date;
+    motivo: string;
+    @IsIn([enfermedad.covid,enfermedad.dengue,enfermedad.hepatitis,enfermedad.sida])
+    diagnostico:enfermedad
+    diagnosticoConfirmado: boolean;
   }
   

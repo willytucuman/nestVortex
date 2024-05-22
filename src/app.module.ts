@@ -38,8 +38,8 @@ import { APP_GUARD } from '@nestjs/core';
     ConsultsModule,
     PracticesModule,
     PatientsModule,
-    UsersModule,
-    AuthModule
+    // UsersModule,
+    // AuthModule
   ],
   // providers: [{
   //   provide:APP_GUARD,

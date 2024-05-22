@@ -2,10 +2,12 @@ import { Entity,PrimaryGeneratedColumn,Column, JoinColumn, OneToMany,ManyToOne,T
 import { Patient } from "src/patients/entities/patient.entity";
 import { History } from "src/history/entities/history.entity";
 import { Medic } from "src/medics/entities/medic.entity";
-enum type {
+
+export enum typeEntry {
   practica="practica",
   consulta= "consulta"
 }
+
 @Entity()
 @TableInheritance({ column: { type: "varchar", name: "entry_type" } })
 export class Entry {
@@ -13,8 +15,9 @@ export class Entry {
 @PrimaryGeneratedColumn()
 id:number
 
-@Column({name:"type",default:type.consulta})
-type:type
+@Column({name:"type"})
+type:typeEntry
+
 @Column({nullable:true})
 fecha:Date
 
@@ -27,4 +30,5 @@ medic:Medic
 
 @ManyToOne(()=>History,(history)=>history.entries)
 history:History
+
 }

@@ -4,30 +4,30 @@ import { Repository } from 'typeorm';
 import { Consult } from './entities/consult.entity';
 import { CreateConsultDto } from './dto/create-consult.dto';
 import { UpdateConsultDto } from './dto/update-consult.dto';
-import { Entry } from 'src/entries/entities/entry.entity';
+import { History } from 'src/history/entities/history.entity';
+import { HistoryService } from 'src/history/history.service';
+import { typeEntry } from 'src/entries/entities/entry.entity';
 import { Patient } from 'src/patients/entities/patient.entity';
 import { Medic } from 'src/medics/entities/medic.entity';
 @Injectable()
 export class ConsultsService {
   constructor(
     @InjectRepository(Consult) private consultRepository: Repository<Consult>,
-    @InjectRepository(Entry) private entryRepository: Repository<Entry>,
-
+    @InjectRepository(History) private historyRepository: Repository<History>,
+     @InjectRepository(Patient) private patientRepository: Repository<Patient>,
+     @InjectRepository(Medic) private medicRepository: Repository<Medic>,
+     private readonly historyService: HistoryService
+    
   ) {}
 
-  async create(entryId: number,createConsultDto: CreateConsultDto): Promise<Consult> {
-    const entry = await this.entryRepository.findOne({where:{
-      id:entryId
-    }});
-    if (!entry ) {
-      throw new NotFoundException(`Entry with ID ${entryId} not found`);
-    }
-    
-    const consult = this.consultRepository.create({
-      ...createConsultDto,
-    });
-  await this.consultRepository.save(consult);
-  return consult
+  async create(historyId: number,createConsultDto: CreateConsultDto) { 
+    const foundHistory = await this.historyService.findOneHistory(historyId)
+    const consult = this.consultRepository.create(createConsultDto)
+    consult.type = typeEntry.consulta
+    consult.fecha = new Date()
+    foundHistory.entries.push(consult)
+    await this.historyRepository.save(foundHistory)
+    return this.consultRepository.save(consult)
   }
 
   findAll(): Promise<Consult[]> {

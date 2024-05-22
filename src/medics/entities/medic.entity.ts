@@ -22,4 +22,7 @@ export class Medic {
 
    @OneToMany(()=>Entry,entry=>entry.medic)
     entry:Entry[]
+
+    
+
 }

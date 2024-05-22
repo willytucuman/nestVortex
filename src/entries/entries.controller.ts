@@ -18,18 +18,18 @@ export class EntriesController {
     return this.entriesService.getAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.entriesService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.entriesService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateEntryDto: UpdateEntryDto) {
   //   return this.entriesService.updateEntry(+id, updateEntryDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.entriesService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.entriesService.remove(+id);
+  }
 }

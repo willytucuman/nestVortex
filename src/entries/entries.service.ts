@@ -17,6 +17,17 @@ getAll(){
   return this.entryService.find()
 }
 
+findOne(id:number){
+  return this.entryService.findOne({where:{
+    id:id
+  }})
+}
+async remove(id:number){
+  const entryFound = await this.entryService.findOne({where:{
+    id:id
+  }})
+ return this.entryService.delete(entryFound)
+}
 }
 
 

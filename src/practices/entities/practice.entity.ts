@@ -1,5 +1,5 @@
 import { Entry } from "src/entries/entities/entry.entity";
-import { Column ,ChildEntity,ManyToOne} from "typeorm";
+import { Column ,ChildEntity} from "typeorm";
 @ChildEntity()
 export class Practice extends Entry {
     @Column({type: "interval"})

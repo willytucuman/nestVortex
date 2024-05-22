@@ -4,10 +4,11 @@ import { HistoryService } from './history.service';
 import { HistoryController } from './history.controller';
 import { History } from './entities/history.entity';
 import { Patient } from 'src/patients/entities/patient.entity';
+import { PatientsService } from 'src/patients/patients.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([History, Patient])],
+  imports: [TypeOrmModule.forFeature([History,Patient])],
   controllers: [HistoryController],
-  providers: [HistoryService],
+  providers: [HistoryService,PatientsService],
 })
 export class HistoryModule {}
