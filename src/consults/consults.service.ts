@@ -23,11 +23,8 @@ export class ConsultsService {
   ) {}
 
   async create(historyId: number,matriculaMedico:number,createConsultDto: CreateConsultDto) {
-    console.log(matriculaMedico)
   const foundMedic = await this.medicService.findOneMedic(matriculaMedico)
-console.log(foundMedic)
-
-    const foundHistory = await this.historyService.findOneHistory(historyId)
+  const foundHistory = await this.historyService.findOneHistory(historyId)
     if(!foundHistory){
     throw new HttpException("Not Found",HttpStatus.NOT_FOUND)
     }else if(!foundMedic ){

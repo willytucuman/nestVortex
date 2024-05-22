@@ -7,9 +7,9 @@ import { UpdatePracticeDto } from './dto/update-practice.dto';
 export class PracticesController {
   constructor(private readonly practicesService: PracticesService) {}
 
-  @Post(":historyId")
-  create(@Param('historyId') historyId: number, @Body() createPracticeDto: CreatePracticeDto) {
-    return this.practicesService.create(+historyId, createPracticeDto);
+  @Post(":historyId/:matriculaId")
+  create(@Param('historyId') historyId: number, @Param("matriculaId") matriculaId:number , @Body() createPracticeDto: CreatePracticeDto) {
+    return this.practicesService.create(+historyId,+matriculaId, createPracticeDto);
   }
 
   @Get()

@@ -17,11 +17,11 @@ export class MedicsService {
   }
 
   getMedics() {
-    return this.medicService.find({relations:["medic"]});
+    return this.medicService.find();
   }
 
   findOneMedic(numeroMatricula: number) {
-    return this.medicService.findOne({relations:["medic"],
+    return this.medicService.findOne({
       where:{
         numeroMatricula
       }

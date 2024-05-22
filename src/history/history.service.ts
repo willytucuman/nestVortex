@@ -32,11 +32,11 @@ export class HistoryService {
   }
 
   findAll(): Promise<History[]> {
-    return this.historyRepository.find({ relations: ['patient','entries','medic'] });
+    return this.historyRepository.find({ relations: ['patient','entries'] });
   }
 
   findOneHistory(id: number): Promise<History> {
-    return this.historyRepository.findOne({ where: { id }, relations: ['patient','entries','medic'] });
+    return this.historyRepository.findOne({ where: { id }, relations: ['patient','entries'] });
   }
 
   async update(id: number, updateHistoryDto: UpdateHistoryDto): Promise<History> {
