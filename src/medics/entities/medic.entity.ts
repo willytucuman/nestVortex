@@ -1,5 +1,5 @@
 import { Entity,PrimaryGeneratedColumn,Column,OneToMany } from "typeorm";
-import { Entry } from "src/entries/entities/entry.entity";
+import { Consult } from "src/consults/entities/consult.entity";
 @Entity()
 export class Medic {
     @PrimaryGeneratedColumn()
@@ -20,9 +20,9 @@ export class Medic {
     @Column()
     fechaIngreso:Date 
 
-   @OneToMany(()=>Entry,entry=>entry.medic)
-    entry:Entry[]
+  
 
-    
+    @OneToMany(()=>Consult,consult=>consult.medic)
+    consult:Consult
 
 }

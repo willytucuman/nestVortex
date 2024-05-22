@@ -12,17 +12,18 @@ export class MedicsService {
   }
   create(createMedicDto: CreateMedicDto) {
     const medic= this.medicService.create(createMedicDto)
+    medic.fechaIngreso = new Date()
     return this.medicService.save(medic)
   }
 
   getMedics() {
-    return this.medicService.find();
+    return this.medicService.find({relations:["medic"]});
   }
 
-  findOneMedic(id: number) {
-    return this.medicService.findOne({
+  findOneMedic(numeroMatricula: number) {
+    return this.medicService.findOne({relations:["medic"],
       where:{
-        id
+        numeroMatricula
       }
     })
   }

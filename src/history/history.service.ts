@@ -5,6 +5,7 @@ import { History } from './entities/history.entity';
 import { Patient } from 'src/patients/entities/patient.entity';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
+import { Medic } from 'src/medics/entities/medic.entity';
 
 @Injectable()
 export class HistoryService {
@@ -31,11 +32,11 @@ export class HistoryService {
   }
 
   findAll(): Promise<History[]> {
-    return this.historyRepository.find({ relations: ['patient','entries'] });
+    return this.historyRepository.find({ relations: ['patient','entries','medic'] });
   }
 
   findOneHistory(id: number): Promise<History> {
-    return this.historyRepository.findOne({ where: { id }, relations: ['patient','entries'] });
+    return this.historyRepository.findOne({ where: { id }, relations: ['patient','entries','medic'] });
   }
 
   async update(id: number, updateHistoryDto: UpdateHistoryDto): Promise<History> {

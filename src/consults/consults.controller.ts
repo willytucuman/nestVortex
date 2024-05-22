@@ -7,9 +7,9 @@ import { UpdateConsultDto } from './dto/update-consult.dto';
 export class ConsultsController {
   constructor(private readonly consultsService: ConsultsService) {}
 
-  @Post(":historyId")
-  create(@Param('historyId') historyId: number, @Body() createConsultDto: CreateConsultDto) {
-    return this.consultsService.create(historyId, createConsultDto);
+  @Post(":historyId/:matricula")
+  create(@Param('historyId') historyId: number, @Param("matricula") matricula:number,@Body() createConsultDto: CreateConsultDto) {
+    return this.consultsService.create(+historyId, +matricula,createConsultDto);
   }
 
   @Get()

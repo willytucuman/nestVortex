@@ -17,9 +17,9 @@ export class MedicsController {
     return this.medicsService.getMedics();
   }
   @Public()
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.medicsService.findOneMedic(+id);
+  @Get(':numeroMatricula')
+  findOne(@Param('numeroMatricula') numeroMatricula: string) {
+    return this.medicsService.findOneMedic(+numeroMatricula);
   }
   @Public()
   @Patch(':id')
