@@ -1,4 +1,4 @@
-import { Entity,PrimaryGeneratedColumn,Column,OneToOne,OneToMany, JoinColumn } from "typeorm";
+import { Entity,PrimaryGeneratedColumn,Column,OneToOne,OneToMany, JoinColumn, DeleteDateColumn } from "typeorm";
 import { Entry } from "src/entries/entities/entry.entity";
 import { History } from "src/history/entities/history.entity";
 
@@ -21,6 +21,9 @@ nacimiento:Date
 
 @Column({nullable:true})
 obraSocial:string
+
+@DeleteDateColumn()
+deletedAt?: Date
 
 @OneToMany(()=>Entry,entry=>entry.patient)
 entry:Entry[]

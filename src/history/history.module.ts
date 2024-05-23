@@ -6,6 +6,7 @@ import { History } from './entities/history.entity';
 import { Patient } from 'src/patients/entities/patient.entity';
 import { PatientsService } from 'src/patients/patients.service';
 
+
 @Module({
   imports: [TypeOrmModule.forFeature([History,Patient])],
   controllers: [HistoryController],

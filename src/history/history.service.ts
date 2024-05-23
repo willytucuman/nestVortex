@@ -5,8 +5,7 @@ import { History } from './entities/history.entity';
 import { Patient } from 'src/patients/entities/patient.entity';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
-import { Medic } from 'src/medics/entities/medic.entity';
-
+import { Consult } from 'src/consults/entities/consult.entity';
 @Injectable()
 export class HistoryService {
   constructor(

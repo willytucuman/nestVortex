@@ -24,7 +24,6 @@ fecha:Date
 patient:Patient
 
 
-
 @ManyToOne(()=>History,(history)=>history.entries)
 history:History
 

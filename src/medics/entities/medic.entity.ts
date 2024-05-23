@@ -1,6 +1,7 @@
 import { Entity,PrimaryGeneratedColumn,Column,OneToMany } from "typeorm";
 import { Consult } from "src/consults/entities/consult.entity";
 import { Practice } from "src/practices/entities/practice.entity";
+
 @Entity()
 export class Medic {
     @PrimaryGeneratedColumn()
@@ -28,4 +29,5 @@ export class Medic {
 
     @OneToMany(()=>Practice,practice=>practice.medic)
     practice:Practice
+
 }
