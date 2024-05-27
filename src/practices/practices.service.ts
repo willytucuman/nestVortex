@@ -33,9 +33,10 @@ async create(historyId: number, matriculaMedico: number,createPracticeDto: Creat
   const practice =  this.practiceRepository.create(createPracticeDto)
   practice.fecha = new Date()
   practice.type = typeEntry.practica
+  practice.medic = foundMedic
   historyFound.entries.push(practice)
   await this.historyRepository.save(historyFound)
-  return this.practiceRepository.save(practice) 
+  return await this.practiceRepository.save(practice) 
 }
   
 

@@ -4,24 +4,25 @@ import { UpdateMedicDto } from './dto/update-medic.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Medic } from './entities/medic.entity';
-
+import { NotFoundException } from '@nestjs/common';
 @Injectable()
 export class MedicsService {
-  constructor(@InjectRepository(Medic) private medicService:Repository<Medic>){
+  constructor(@InjectRepository(Medic) private medicRepository:Repository<Medic>
+){
 
   }
   create(createMedicDto: CreateMedicDto) {
-    const medic= this.medicService.create(createMedicDto)
+    const medic= this.medicRepository.create(createMedicDto)
     medic.fechaIngreso = new Date()
-    return this.medicService.save(medic)
+    return this.medicRepository.save(medic)
   }
 
   getMedics() {
-    return this.medicService.find();
+    return this.medicRepository.find();
   }
 
   findOneMedic(numeroMatricula: number) {
-    return this.medicService.findOne({
+    return this.medicRepository.findOne({
       where:{
         numeroMatricula
       }
@@ -29,10 +30,16 @@ export class MedicsService {
   }
 
   update(id: number, updateMedicDto: UpdateMedicDto) {
-   return this.medicService.update({id},updateMedicDto) ;
+   return this.medicRepository.update({id},updateMedicDto) ;
   }
 
-  remove(id: number) {
-   return this.medicService.delete({id})
+  async remove(id: number): Promise<void> {
+   const queryBuilder = this.medicRepository
+   .createQueryBuilder()
+   .delete()
+   .from(Medic)
+   .where("id = :id", { id })
+   .execute();
+  
   }
 }

@@ -1,13 +1,15 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, UsePipes } from '@nestjs/common';
 import { PracticesService } from './practices.service';
 import { CreatePracticeDto } from './dto/create-practice.dto';
 import { UpdatePracticeDto } from './dto/update-practice.dto';
-
+import { ZodValidationPipe } from 'src/pipes/validationPipe';
+import { createPracticeSchema } from './dto/create-practice.dto';
 @Controller('practices')
 export class PracticesController {
   constructor(private readonly practicesService: PracticesService) {}
 
   @Post(":historyId/:matriculaId")
+  // @UsePipes(new ZodValidationPipe(createPracticeSchema))
   create(@Param('historyId') historyId: number, @Param("matriculaId") matriculaId:number , @Body() createPracticeDto: CreatePracticeDto) {
     return this.practicesService.create(+historyId,+matriculaId, createPracticeDto);
   }

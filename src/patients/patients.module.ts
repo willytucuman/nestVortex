@@ -3,7 +3,6 @@ import { PatientsService } from './patients.service';
 import { PatientsController } from './patients.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Patient } from './entities/patient.entity';
-import { AuthGuard } from 'src/auth-service/authGuard';
 import { History } from 'src/history/entities/history.entity';
 import { HistoryService } from 'src/history/history.service';
 

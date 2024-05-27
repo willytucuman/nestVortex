@@ -1,12 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, UseFilters } from '@nestjs/common';
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
 
+
 @Controller('history')
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
-
   @Post(':patientId')
   create(@Param('patientId') patientId: string, @Body() createHistoryDto: CreateHistoryDto) {
     return this.historyService.create(+patientId, createHistoryDto);
@@ -14,8 +14,12 @@ export class HistoryController {
 
   @Get()
   findAll() {
-    return this.historyService.findAll();
-  }
+    try {
+      return this.historyService.findAll();
+      } catch (error) {
+      throw new HttpException("Error messsage",HttpStatus.BAD_REQUEST)
+    }
+}
 
   @Get(':id')
   findOne(@Param('id') id: string) {

@@ -14,9 +14,7 @@ export class EntriesService {
 
 
 async getAll(){
- const entradas= await this.entryRepository.find() 
- 
-  console.log(entradas)
+ return await this.entryRepository.find() 
 }
 
 findOne(id:number){

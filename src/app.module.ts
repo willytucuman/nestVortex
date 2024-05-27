@@ -1,5 +1,4 @@
 import { Module , Logger} from '@nestjs/common';
-import { AuthGuard } from './auth-service/authGuard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HistoryModule } from './history/history.module';
@@ -8,16 +7,20 @@ import { EntriesModule } from './entries/entries.module';
 import { ConsultsModule } from './consults/consults.module';
 import { PracticesModule } from './practices/practices.module';
 import { PatientsModule } from './patients/patients.module';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './exceptions/ForbiddenException';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth-service/auth-service.module';
-import { APP_GUARD } from '@nestjs/core';
+import { UsersService } from './users/users.service';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env.local.development',
     }),
     TypeOrmModule.forRootAsync({
-      imports:[ConfigModule],
+      imports:[ConfigModule,UsersModule],
       inject:[ConfigService],
       useFactory:(ConfigService:ConfigService) =>(
         {
@@ -38,13 +41,15 @@ import { APP_GUARD } from '@nestjs/core';
     ConsultsModule,
     PracticesModule,
     PatientsModule,
-    // UsersModule,
-    // AuthModule
+    AuthModule,
   ],
-  // providers: [{
-  //   provide:APP_GUARD,
-  //   useClass:AuthGuard
-  // }],
+  providers:[{
+    provide:APP_FILTER,
+    useClass:HttpExceptionFilter
+  }, 
+  AuthService,
+  UsersService,
+]
 })
 export class AppModule {
   private readonly logger = new Logger(AppModule.name);

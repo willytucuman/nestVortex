@@ -31,7 +31,6 @@ export class PatientsService {
 
         getPatients() {
           return this.patientRepository.find({relations:["history"]})
-          
         }
 
         async findOnePatient(id: number) {
@@ -56,8 +55,7 @@ export class PatientsService {
         const queryBuilder = this.patientRepository
         .createQueryBuilder()
         .softDelete()
-        .where("id = :id", {id})
-        .execute()
-        return "soft delete executed"
+        .where("id = :id", { id: 1 })
+        .execute();
     }
 }

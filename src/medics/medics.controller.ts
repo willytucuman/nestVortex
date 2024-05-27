@@ -2,11 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MedicsService } from './medics.service';
 import { CreateMedicDto } from './dto/create-medic.dto';
 import { UpdateMedicDto } from './dto/update-medic.dto';
-import { Public } from 'src/decorators/isPublic';
+import { HttpException,HttpStatus } from '@nestjs/common';
+import { Medic } from './entities/medic.entity';
 @Controller('medics')
 export class MedicsController {
   constructor(private  medicsService: MedicsService) {}
-
+  
   @Post()
   create(@Body() createMedicDto: CreateMedicDto) {
     return this.medicsService.create(createMedicDto);
@@ -27,9 +28,8 @@ export class MedicsController {
   update(@Param('id') id: string, @Body() updateMedicDto: UpdateMedicDto) {
     return this.medicsService.update(+id, updateMedicDto);
   }
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.medicsService.remove(+id);
+  async deleteMedico(@Param('id') id: number): Promise<void> {
+    this.medicsService.remove(id)
   }
 }

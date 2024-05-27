@@ -7,16 +7,13 @@ import { UpdateConsultDto } from './dto/update-consult.dto';
 import { History } from 'src/history/entities/history.entity';
 import { HistoryService } from 'src/history/history.service';
 import { typeEntry } from 'src/entries/entities/entry.entity';
-import { Patient } from 'src/patients/entities/patient.entity';
-import { Medic } from 'src/medics/entities/medic.entity';
 import { MedicsService } from 'src/medics/medics.service';
+
 @Injectable()
 export class ConsultsService {
   constructor(
     @InjectRepository(Consult) private consultRepository: Repository<Consult>,
     @InjectRepository(History) private historyRepository: Repository<History>,
-     @InjectRepository(Patient) private patientRepository: Repository<Patient>,
-     @InjectRepository(Medic) private medicRepository: Repository<Medic>,
      private readonly historyService: HistoryService,
      private readonly medicService:MedicsService
     

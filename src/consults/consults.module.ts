@@ -12,7 +12,7 @@ import { MedicsService } from 'src/medics/medics.service';
 @Module({
   imports:[TypeOrmModule.forFeature([Consult,History,Patient,Medic])],
   controllers: [ConsultsController],
-  providers: [ConsultsService,HistoryService,MedicsService],
+  providers: [ConsultsService,HistoryService,MedicsService]
 })
 export class ConsultsModule {
 }
