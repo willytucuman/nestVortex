@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
+import { PdfModule } from './pdf/pdf.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { UsersService } from './users/users.service';
     PracticesModule,
     PatientsModule,
     AuthModule,
+    PdfModule,
   ],
   providers:[{
     provide:APP_FILTER,

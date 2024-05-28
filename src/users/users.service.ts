@@ -32,7 +32,5 @@ export class UsersService {
   findAll(){
     return this.users.find(user=>user)
   }
-  create(user:CreateUserDto){
-     return
-  }
+
 }

@@ -4,7 +4,6 @@ import { UpdateMedicDto } from './dto/update-medic.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Medic } from './entities/medic.entity';
-import { NotFoundException } from '@nestjs/common';
 @Injectable()
 export class MedicsService {
   constructor(@InjectRepository(Medic) private medicRepository:Repository<Medic>
