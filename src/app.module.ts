@@ -14,7 +14,8 @@ import { AuthService } from './auth/auth.service';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { PdfModule } from './pdf/pdf.module';
-
+import {  NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { RequestsLoggerMiddleware } from './logger.middleware';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -53,10 +54,15 @@ import { PdfModule } from './pdf/pdf.module';
   UsersService,
 ]
 })
-export class AppModule {
-  private readonly logger = new Logger(AppModule.name);
+// export class AppModule {
+//   private readonly logger = new Logger(AppModule.name);
 
-  constructor() {
-    this.logger.log('Database connection established');
+//   constructor() {
+//     this.logger.log('Database connection established');
+//   }
+// }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(RequestsLoggerMiddleware).forRoutes('*');
   }
 }

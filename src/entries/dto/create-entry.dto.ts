@@ -8,5 +8,4 @@ export class CreateEntryDto {
     patient_id:number
     @IsNumber()
     medic_id:number
-    
 }
